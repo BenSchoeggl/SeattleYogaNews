@@ -53,4 +53,14 @@ footer {
     .jumbotron {
         padding-bottom: 4em;
     }
+
+    .comment {
+        background-color: #FFEE8B;
+        border-radius: 10px;
+        margin-top: 1em;
+    }
+
+    .comment p {
+        margin-top: 1em;
+    }
 }

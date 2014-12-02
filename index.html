@@ -77,23 +77,35 @@
                     </div>
                 </form>
             </div>
+            <div class="jumbotron">
+                <div id="filter-options-group">
+                    <h2>Results</h2>
+                    Sort By:
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default">Style</button>
+                        <button type="button" class="btn btn-default">Price</button>
+                        <button type="button" class="btn btn-default">Hours Per Course</button>
+                        <button type="button" class="btn btn-default">Average Rating</button>
+                    </div>
+                </div>
 
-            <!--<section>-->
-                <!--<div ng-repeat="studio in studios" class="container comment">-->
-                    <!--<div class="ratings">-->
-                        <!--<span class="glyphicon glyphicon-arrow-up"-->
-                              <!--ng-click="incrementVotes(review, 1)"></span>-->
-                        <!--{{review.votes || 0}}-->
-                        <!--<span class="glyphicon glyphicon-arrow-down"-->
-                              <!--ng-click="incrementVotes(review, -1)"></span>-->
-                    <!--</div>-->
-                    <!--<h4>{{review.name}} - {{review.title}}</h4>-->
-                    <!--<rating max="5" ng-model="review.rating" readonly="true"></rating>-->
-                    <!--<p>{{review.review}}</p>-->
-                    <!--<div id="remove" ng-click="removeReview(review)"><span class="glyphicon glyphicon-remove"></span></div>-->
-                <!--</div>-->
-            <!--</section>-->
 
+                <section>
+                    <div ng-repeat="studio in studios" class="container comment">
+                        <div class="ratings">
+                            <span class="glyphicon glyphicon-arrow-up"
+                                  ng-click="incrementVotes(review, 1)"></span>
+                            {{studio.averageRating || 0}}
+                            <span class="glyphicon glyphicon-arrow-down"
+                                  ng-click="incrementVotes(review, -1)"></span>
+                        </div>
+                        <h4>{{review.name}} - {{review.title}}</h4>
+                        <rating max="5" ng-model="review.rating" readonly="true"></rating>
+                        <p>{{review.review}}</p>
+                        <div id="remove" ng-click="removeReview(review)"><span class="glyphicon glyphicon-remove"></span></div>
+                    </div>
+                </section>
+            </div>
             <footer>
                 <p>&copy; Seattle Yoga News</p>
                 <ul id="list" class="pull-right">
