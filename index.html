@@ -1,6 +1,6 @@
 <!-- main html for find a teacher tab of seattleyoganews.com -->
-<!doctype html>
-<html>
+    <!doctype html>
+    <html>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,10 +8,8 @@
 
         <!-- style sheets -->
         <link rel="stylesheet" href="css/main.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-
-        <!-- angular script sheets -->
-        <script src="lib/angular-1.3.1/angular.js"></script>
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <script src="lib/angular.js"></script>
     </head>
 
     <body>
@@ -22,59 +20,67 @@
                 <nav class="navbar navbar-default" role="navigation">
                     <div class="container-fluid">
                         <div class="navbar-header">
-                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
                             <a class="navbar-brand" href="#">Seattle Yoga News</a>
                         </div>
                         <div id="navbar" class="navbar-collapse collapse">
                             <ul class="nav navbar-nav">
-                                <li class="active"><a href="#">Home</a></li>
-                                <li><a href="http://seattleyoganews.com/category/yoga-interviews-2/">Yoga Interviews</a></li>
-                                <li><a href="http://seattleyoganews.com/category/yoga-news/">Yoga News</a></li>
-                                <li><a href="http://seattleyoganews.com/category/yoga-opinions/">Yoga Opinions</a></li>
-                                <li><a href="http://seattleyoganews.com/category/yoga-advice-2/">Yoga Advice</a></li>
-                                <li><a href="http://seattleyoganews.com/category/yoga-lifestyle/">Yoga Lifestyle</a></li>
-                                <li><a href="http://seattleyoganews.com/category/yoga-health-2/">Yoga & Health</a></li>
-                                <!--<li class="dropdown">-->
-                                    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>-->
-                                    <!--<ul class="dropdown-menu" role="menu">-->
-                                        <!--<li><a href="#">Yoga Interviews</a></li>-->
-                                        <!--<li><a href="#">Yoga News</a></li>-->
-                                        <!--<li><a href="#">Yoga Opinions</a></li>-->
-                                        <!--<li><a href="">Yoga Advice</a></li>-->
-                                        <!--<li-->
-                                        <!--<li class="divider"></li>-->
-                                        <!--<li class="dropdown-header">Nav header</li>-->
-                                        <!--<li><a href="#">Separated link</a></li>-->
-                                        <!--<li><a href="#">One more separated link</a></li>-->
-                                    <!--</ul>-->
-                                <!--</li>-->
+                                <li><a href="http://seattleyoganews.com/category/yoga-interviews-2/">Blog</a></li>
+                                <li><a href="http://seattleyoganews.com/category/yoga-news/">Videos</a></li>
+                                <li><a href="http://seattleyoganews.com/category/yoga-opinions/">Types of Yoga</a></li>
                             </ul>
-                            <!--<ul class="nav navbar-nav navbar-right">-->
-                                <!--<li class="active"><a href="./">Default <span class="sr-only">(current)</span></a></li>-->
-                                <!--<li><a href="../navbar-static-top/">Static top</a></li>-->
-                                <!--<li><a href="../navbar-fixed-top/">Fixed top</a></li>-->
-                            <!--</ul>-->
                         </div><!--/.nav-collapse -->
-                    </div><!--/.container-fluid -->
+                    </div>
                 </nav>
             </div>
             <div class="jumbotron">
-                <h1>Find a Teacher</h1>
-                <select name="occupation" id="occupation" class="form-control">
-                    <option value="" selected disabled>select...</option>
-                    <option value="student">Student</option>
-                    <option value="teacher">Teacher</option>
-                    <option value="bum">Bum</option>
-                    <option value="other">other...</option>
-                </select>
-                    <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
-                </p>
+                <h1>Find Yoga Teacher Training</h1>
+                <form ng-submit="search(searchCriteria)">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <select id="style-selector" class="form-control" ng-model="searchCriteria.style">
+                                <option value="" selected disabled>Style</option>
+                                <option value="bikram">Bikram</option>
+                                <option value="hatha">Hatha</option>
+                                <option value="anusara">Anusara</option>
+                                <option value="ashtanga">Ashtanga</option>
+                                <option value="hotYoga">Hot Yoga</option>
+                                <option value="iyengar">Iyengar</option>
+                            </select>
+                            <select id="price-selector" class="form-control" ng-model="searchCriteria.price">
+                                <option value="" selected disabled>Price</option>
+                                <option value="a-little">cash money</option>
+                                <option value="a-lot">Even more cash money</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <select id="hours-selector" class="form-control" ng-model="searchCriteria.hours">
+                                <option value="" selected disabled>Hours per course</option>
+                                <option value="student">200</option>
+                                <option value="teacher">300</option>
+                                <option value="bum">500</option>
+                            </select>
+                            <input type="text" id="zip-input" class="form-control" placeholder="ZIP Code" ng-model="searchCriteria.zipCode"/>
+                        </div>
+                    </div>
+                    <button id="search-button" type="submit" class="btn btn-primary">Search</button>
+                </form>
             </div>
+
+            <section>
+                <div ng-repeat="studio in studios" class="container comment">
+                    <div class="ratings">
+                        <span class="glyphicon glyphicon-arrow-up"
+                              ng-click="incrementVotes(studio, 1)"></span>
+                        {{review.votes || 0}}
+                        <span class="glyphicon glyphicon-arrow-down"
+                              ng-click="incrementVotes(review, -1)"></span>
+                    </div>
+                    <h4>{{review.name}} - {{review.title}}</h4>
+                    <rating max="5" ng-model="review.rating" readonly="true"></rating>
+                    <p>{{review.review}}</p>
+                    <div id="remove" ng-click="removeReview(review)"><span class="glyphicon glyphicon-remove"></span></div>
+                </div>
+            </section>
 
         </main> <!-- main -->
     </body> <!-- body -->
