@@ -61,7 +61,8 @@
                     <div class="row">
                         <div class="col-md-6">
                             <select id="style-selector" class="form-control" ng-model="searchCriteria.style">
-                                <option value="">Style</option>
+                                <option value="" selected disabled>Style</option>
+                                <option value="">Any Style</option>
                                 <option value="bikram">Bikram</option>
                                 <option value="hatha">Hatha</option>
                                 <option value="anusara">Anusara</option>
@@ -70,22 +71,24 @@
                                 <option value="iyengar">Iyengar</option>
                             </select>
                             <select id="price-selector" class="form-control" ng-model="searchCriteria.price">
-                                <option value="">Price</option>
+                                <option value="" selected disabled>Price</option>
+                                <option value="">Any Price</option>
                                 <option value="a-little">$0 - $999</option>
                                 <option value="kinda">$1,000 - $1,999</option>
                                 <option value="semi">$2,000 - $2,999</option>
-                                <option value="a-lot">$3,000 - $3,999</option>
-                                <option value="a-lot">$4,000 - $4.999</option>
-                                <option value="a-lot">$5,000 - $5,999</option>
+                                <option value="medium">$3,000 - $3,999</option>
+                                <option value="high">$4,000 - $4.999</option>
+                                <option value="higher">$5,000 - $5,999</option>
                                 <option value="a-lot">$6,000 - $6,999</option>
                             </select>
                         </div>
                         <div class="col-md-6">
                             <select id="hours-selector" class="form-control" ng-model="searchCriteria.hours">
-                                <option value="">Hours per course</option>
+                                <option value="" selected disabled>Hours per course</option>
+                                <option value="">Any # Hours</option>
                                 <option value="student">200</option>
                                 <option value="teacher">300</option>
-                                <option value="bum">500</option>
+                                <option value="intense">500</option>
                             </select>
                             <input type="text" id="zip-input" class="form-control" placeholder="ZIP Code" ng-model="searchCriteria.zipCode"/>
                         </div>
