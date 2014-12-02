@@ -1,6 +1,6 @@
 body {
     font-size: 16px;
-    background-image: url('../img/yoga.jpg');
+    background-image: url('../img/picture.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -21,6 +21,10 @@ select {
 
 .jumbotron h1 {
     margin-bottom: .5em;
+}
+
+#style-selector option, #price-selector option, #hours-selector option{
+    opacity: .1;
 }
 
 footer {
