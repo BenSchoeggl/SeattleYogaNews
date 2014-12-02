@@ -4,6 +4,7 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    margin-top: 150px;
 }
 
 select {
@@ -27,30 +28,63 @@ footer {
     background-color: #000000;
     color: #777;
     width: 100%;
-    position: absolute;
+    position: fixed;
     bottom: 0;
-    display: inline;
+}
+
+footer p {
+    margin-left: 1em;
+}
+
+footer p, footer li {
+    padding-top: .5em;
+    display: inline-block;
+}
+
+#list li {
+    margin-right: 1em;
 }
 
 #list a {
     color: #777;
 }
 
-#list li {
-    display: inline;
+#copyright {
+    color: #f5f5f5;
 }
 
 @media screen and (min-width: 992px) {
+
     .jumbotron {
         width: 75%;
         margin-left: auto;
         margin-right: auto;
         border-radius: 5px;
     }
+
+    #copyright {
+        display: none;
+    }
+
+    #toTop {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 768px) {
+    body {
+        margin-top: 100px;
+    }
+
     .jumbotron {
         padding-bottom: 4em;
+    }
+
+    #list {
+        display: none;
+    }
+
+    footer {
+        display: none;
     }
 }
