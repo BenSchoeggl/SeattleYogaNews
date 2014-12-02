@@ -23,6 +23,23 @@ select {
     margin-bottom: .5em;
 }
 
+footer {
+    background-color: #000000;
+    color: #777;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    display: inline;
+}
+
+#list a {
+    color: #777;
+}
+
+#list li {
+    display: inline;
+}
+
 @media screen and (min-width: 992px) {
     .jumbotron {
         width: 75%;
