@@ -7,33 +7,36 @@
         <title>Find A Yoga Teacher</title>
 
         <!-- style sheets -->
-        <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/main.css">
         <script src="lib/angular.js"></script>
     </head>
 
     <body>
         <main>
-            <div class="container">
-
-                <!-- Static navbar -->
-                <nav class="navbar navbar-default" role="navigation">
-                    <div class="container-fluid">
-                        <div class="navbar-header">
-                            <a class="navbar-brand" href="#">Seattle Yoga News</a>
-                        </div>
-                        <div id="navbar" class="navbar-collapse collapse">
-                            <ul class="nav navbar-nav">
-                                <li><a href="http://seattleyoganews.com/category/yoga-interviews-2/">Blog</a></li>
-                                <li><a href="http://seattleyoganews.com/category/yoga-news/">Videos</a></li>
-                                <li><a href="http://seattleyoganews.com/category/yoga-opinions/">Types of Yoga</a></li>
-                            </ul>
-                        </div><!--/.nav-collapse -->
+            <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">Seattle Yoga News</a>
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
                     </div>
-                </nav>
-            </div>
+                    <div class="collapse navbar-collapse bs-navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li><a href="http://seattleyoganews.com/category/yoga-interviews-2/">Blog</a></li>
+                            <li><a href="http://seattleyoganews.com/category/yoga-news/">Videos</a></li>
+                            <li><a href="http://seattleyoganews.com/category/yoga-opinions/">Types of Yoga</a></li>
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </nav>
+
             <div class="jumbotron">
-                <h1>Find Yoga Teacher Training</h1>
+                <h1 class="text-center">Find Yoga Teacher Training</h1>
                 <form ng-submit="search(searchCriteria)">
                     <div class="row">
                         <div class="col-md-6">
@@ -48,8 +51,13 @@
                             </select>
                             <select id="price-selector" class="form-control" ng-model="searchCriteria.price">
                                 <option value="" selected disabled>Price</option>
-                                <option value="a-little">cash money</option>
-                                <option value="a-lot">Even more cash money</option>
+                                <option value="a-little">$0 - $999</option>
+                                <option value="kinda">$1,000 - $1,999</option>
+                                <option value="semi">$2,000 - $2,999</option>
+                                <option value="a-lot">$3,000 - $3,999</option>
+                                <option value="a-lot">$4,000 - $4.999</option>
+                                <option value="a-lot">$5,000 - $5,999</option>
+                                <option value="a-lot">$6,000 - $6,999</option>
                             </select>
                         </div>
                         <div class="col-md-6">
@@ -62,25 +70,25 @@
                             <input type="text" id="zip-input" class="form-control" placeholder="ZIP Code" ng-model="searchCriteria.zipCode"/>
                         </div>
                     </div>
-                    <button id="search-button" type="submit" class="btn btn-primary">Search</button>
                 </form>
             </div>
 
-            <section>
-                <div ng-repeat="studio in studios" class="container comment">
-                    <div class="ratings">
-                        <span class="glyphicon glyphicon-arrow-up"
-                              ng-click="incrementVotes(studio, 1)"></span>
-                        {{review.votes || 0}}
-                        <span class="glyphicon glyphicon-arrow-down"
-                              ng-click="incrementVotes(review, -1)"></span>
-                    </div>
-                    <h4>{{review.name}} - {{review.title}}</h4>
-                    <rating max="5" ng-model="review.rating" readonly="true"></rating>
-                    <p>{{review.review}}</p>
-                    <div id="remove" ng-click="removeReview(review)"><span class="glyphicon glyphicon-remove"></span></div>
-                </div>
-            </section>
+
+            <!--<section>-->
+                <!--<div ng-repeat="studio in studios" class="container comment">-->
+                    <!--<div class="ratings">-->
+                        <!--<span class="glyphicon glyphicon-arrow-up"-->
+                              <!--ng-click="incrementVotes(studio, 1)"></span>-->
+                        <!--{{review.votes || 0}}-->
+                        <!--<span class="glyphicon glyphicon-arrow-down"-->
+                              <!--ng-click="incrementVotes(review, -1)"></span>-->
+                    <!--</div>-->
+                    <!--<h4>{{review.name}} - {{review.title}}</h4>-->
+                    <!--<rating max="5" ng-model="review.rating" readonly="true"></rating>-->
+                    <!--<p>{{review.review}}</p>-->
+                    <!--<div id="remove" ng-click="removeReview(review)"><span class="glyphicon glyphicon-remove"></span></div>-->
+                <!--</div>-->
+            <!--</section>-->
 
         </main> <!-- main -->
     </body> <!-- body -->

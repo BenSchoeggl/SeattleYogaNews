@@ -1,0 +1,39 @@
+body {
+    font-size: 16px;
+    background-image: url('../img/yoga.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+select {
+    margin-bottom: 1.5em;
+}
+
+.navbar {
+    border-radius: 0px;
+}
+
+.jumbotron {
+    padding-top: 1em;
+    background-color: rgba(255,255,255,.3);
+}
+
+.jumbotron h1 {
+    margin-bottom: .5em;
+}
+
+@media screen and (min-width: 992px) {
+    .jumbotron {
+        width: 75%;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 5px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .jumbotron {
+        padding-bottom: 4em;
+    }
+}
