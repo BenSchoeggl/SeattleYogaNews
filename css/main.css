@@ -28,6 +28,21 @@ select {
     opacity: .1;
 }
 
+.profile {
+    line-height: 1em;
+    border-bottom: solid 1px #000000;
+    border-bottom-width: 75%;
+}
+
+.profile a {
+    color: purple;
+}
+
+.profilePic {
+    width: 200px;
+    margin-top: 2em;
+}
+
 footer {
     background-color: #000000;
     color: #777;

@@ -73,7 +73,7 @@ angular.module('YogaStudiosApp', ['ui.bootstrap'])
                 } else if (searchPrice == '4' && studio.price >= 10000 && studio.price < 11000) {
                     return true;
                 } else {
-                    return false
+                    return false;
                 }
             }
 
@@ -89,7 +89,7 @@ angular.module('YogaStudiosApp', ['ui.bootstrap'])
                 } else if (searchHour == '5' && studio.numberOfHours >= 500 && studio.numberOfHours < 600) {
                     return true;
                 } else {
-                    return false
+                    return false;
                 }
             }
 
