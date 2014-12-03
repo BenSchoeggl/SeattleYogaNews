@@ -41,7 +41,9 @@ footer p {
 }
 
 footer p, footer li {
-    padding-top: .5em;
+    padding-top: .2em;
+    padding-bottom: 0;
+    margin-bottom: 0;
     display: inline-block;
 }
 
