@@ -16,7 +16,6 @@ angular.module('YogaStudiosApp', ['ui.bootstrap'])
                 .success(function (data) {
                     $scope.studios = data.results;
                     console.log('refreshed');
-                    console.log($scope.studios);
                 });
         };  //$scope.refreshStudios
         //called to get all the studios
@@ -52,61 +51,70 @@ angular.module('YogaStudiosApp', ['ui.bootstrap'])
                     $scope.updating = false;
                 })
         };  //$scope.addRating
+
     })
-    .filter('filterStudios', function(studios) {
-        return function(studios) {
-            function isInPriceRange(studio) {
-                if (searchPrice == 'any') {
-                    return true;
-                } else if (searchPrice == '4' && studio.price >= 4000 && studio.price < 5000) {
-                    return true;
-                } else if (searchPrice == '4' && studio.price >= 5000 && studio.price < 6000) {
-                    return true;
-                } else if (searchPrice == '4' && studio.price >= 6000 && studio.price < 7000) {
-                    return true;
-                } else if (searchPrice == '4' && studio.price >= 7000 && studio.price < 8000) {
-                    return true;
-                } else if (searchPrice == '4' && studio.price >= 8000 && studio.price < 9000) {
-                    return true;
-                } else if (searchPrice == '4' && studio.price >= 9000 && studio.price < 10000) {
-                    return true;
-                } else if (searchPrice == '4' && studio.price >= 10000 && studio.price < 11000) {
-                    return true;
-                } else {
-                    return false
-                }
+    .filter('filterStudios', function() {
+        function isInPriceRange(studio) {
+            if (searchPrice == 'any') {
+                return true;
+            } else if (searchPrice == '4' && studio.price >= 4000 && studio.price < 5000) {
+                return true;
+            } else if (searchPrice == '4' && studio.price >= 5000 && studio.price < 6000) {
+                return true;
+            } else if (searchPrice == '4' && studio.price >= 6000 && studio.price < 7000) {
+                return true;
+            } else if (searchPrice == '4' && studio.price >= 7000 && studio.price < 8000) {
+                return true;
+            } else if (searchPrice == '4' && studio.price >= 8000 && studio.price < 9000) {
+                return true;
+            } else if (searchPrice == '4' && studio.price >= 9000 && studio.price < 10000) {
+                return true;
+            } else if (searchPrice == '4' && studio.price >= 10000 && studio.price < 11000) {
+                return true;
+            } else {
+                return false
             }
+        }
 
-            function isInHourRange() {
-                if (searchHour == 'any') {
-                    return true;
-                } else if (searchHour == '2' && studio.numberOfHours >= 200 && studio.numberOfHours < 300) {
-                    return true;
-                } else if (searchHour == '3' && studio.numberOfHours >= 300 && studio.numberOfHours < 400) {
-                    return true;
-                } else if (searchHour == '4' && studio.numberOfHours >= 400 && studio.numberOfHours < 500) {
-                    return true;
-                } else if (searchHour == '5' && studio.numberOfHours >= 500 && studio.numberOfHours < 600) {
-                    return true;
-                } else {
-                    return false
-                }
+        function isInHourRange() {
+            if (searchHour == 'any') {
+                return true;
+            } else if (searchHour == '2' && studio.numberOfHours >= 200 && studio.numberOfHours < 300) {
+                return true;
+            } else if (searchHour == '3' && studio.numberOfHours >= 300 && studio.numberOfHours < 400) {
+                return true;
+            } else if (searchHour == '4' && studio.numberOfHours >= 400 && studio.numberOfHours < 500) {
+                return true;
+            } else if (searchHour == '5' && studio.numberOfHours >= 500 && studio.numberOfHours < 600) {
+                return true;
+            } else {
+                return false
             }
-
+        }
+        return function(input) {
             var filteredStudios;
-            studios.forEach(function(studio) {
-                if (studio.style1.toLowerCase() == searchStyle.toLowerCase() ||
-                    studio.style2.toLowerCase() == searchStyle.toLowerCase() ||
-                    studio.style3.toLowerCase() == searchStyle.toLowerCase()) {
-                    filteredStudios.push(studio);
-                } else if (isInPriceRange(studio)) {
-                    filteredStudios.push(studio);
-                } else if (isInHourRange(studio)) {
-                    filteredStudios.push(studio);
-                } else if (!studio.address.indexOf(searchZip) == -1) {
-                    filteredStudios.push(studio);
+
+            var searchStyle = document.getElementById('#style-selector');
+            var searchPrice = $('#price-selector').val();
+            var searchHour = $('#hour-selector').val();
+            var searchZip = $('#zip-input').val();
+            console.log(searchStyle);
+            console.log(searchPrice);
+            console.log(searchHour);
+            console.log(searchZip);
+            for (var i = 0; i < input.length; i++) {
+                if (input[i].style1.toLowerCase() == searchStyle.toLowerCase() ||
+                    input[i].style2.toLowerCase() == searchStyle.toLowerCase() ||
+                    input[i].style3.toLowerCase() == searchStyle.toLowerCase()) {
+                    filteredStudios.push(input[i]);
+                } else if (isInPriceRange(input[i])) {
+                    filteredStudios.push(input[i]);
+                } else if (isInHourRange(input[i])) {
+                    filteredStudios.push(input[i]);
+                } else if (!input[i].address.indexOf(searchZip) == -1) {
+                    filteredStudios.push(input[i]);
                 }
-            });
+            }
             return filteredStudios;
         }
     });
