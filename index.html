@@ -10,10 +10,11 @@
         <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" href="css/main.css">
         <script src="lib/angular.js"></script>
+        <script src="lib/angularBootstrap.min.js"></script>
     </head>
 
     <body>
-        <main>
+        <main ng-app="YogaStudiosApp" ng-controller="StudiosController">
             <header>
                 <nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
                     <div class="container">
@@ -40,43 +41,42 @@
 
             <div class="jumbotron">
                 <h1 class="text-center">Find Yoga Teacher Training</h1>
-                <form ng-submit="search(searchCriteria)">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <select id="style-selector" class="form-control" ng-model="searchCriteria.style">
-                                <option class="styles" value="" selected disabled>Style</option>
-                                <option class="styles" value="">Any Style</option>
-                                <option class="styles" value="bikram">Bikram</option>
-                                <option value="hatha">Hatha</option>
-                                <option value="anusara">Anusara</option>
-                                <option value="ashtanga">Ashtanga</option>
-                                <option value="hotYoga">Hot Yoga</option>
-                                <option value="iyengar">Iyengar</option>
-                            </select>
-                            <select id="price-selector" class="form-control" ng-model="searchCriteria.price">
-                                <option value="" selected disabled>Price</option>
-                                <option value="">Any Price</option>
-                                <option value="a-little">$0 - $999</option>
-                                <option value="kinda">$1,000 - $1,999</option>
-                                <option value="semi">$2,000 - $2,999</option>
-                                <option value="medium">$3,000 - $3,999</option>
-                                <option value="high">$4,000 - $4.999</option>
-                                <option value="higher">$5,000 - $5,999</option>
-                                <option value="a-lot">$6,000 - $6,999</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <select id="hours-selector" class="form-control" ng-model="searchCriteria.hours">
-                                <option value="" selected disabled>Hours per course</option>
-                                <option value="">Any # of Hours</option>
-                                <option value="student">200</option>
-                                <option value="teacher">300</option>
-                                <option value="intense">500</option>
-                            </select>
-                            <input type="text" id="zip-input" class="form-control" placeholder="ZIP Code" ng-model="searchCriteria.zipCode"/>
-                        </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <select ng-model="searchStyle" id="style-selector" class="form-control" ng-change="refreshResults(searchCriteria)">
+                            <option class="styles" value="" selected disabled>Style...</option>
+                            <option class="styles" value="any">Any Style</option>
+                            <option class="styles" value="bikram">Bikram</option>
+                            <option value="hatha">Hatha</option>
+                            <option value="anusara">Anusara</option>
+                            <option value="ashtanga">Ashtanga</option>
+                            <option value="hotYoga">Hot Yoga</option>
+                            <option value="iyengar">Iyengar</option>
+                        </select>
+                        <select ng-model="searchPrice" id="price-selector" class="form-control" ng-change="refreshResults(searchCriteria)">
+                            <option value="" selected disabled>Price...</option>
+                            <option value="any">Any Price</option>
+                            <option value="4">$4000 - $4,999</option>
+                            <option value="5">$5,000 - $5,999</option>
+                            <option value="6">$6,000 - $6,999</option>
+                            <option value="7">$7,000 - $7,999</option>
+                            <option value="8">$8,000 - $8.999</option>
+                            <option value="9">$9,000 - $9,999</option>
+                            <option value="10">$10,000 - $10,999</option>
+                        </select>
                     </div>
-                </form>
+                    <div class="col-md-6">
+                        <select ng-model="searchHours" id="hours-selector" class="form-control" ng-change="refreshResults(searchCriteria)">
+                            <option value="" selected disabled>Hours per course...</option>
+                            <option value="any">Any number of Hours</option>
+                            <option value="2">200-299</option>
+                            <option value="3">300-399</option>
+                            <option value="4">400-499</option>
+                            <option value="5">500-599</option>
+                        </select>
+                        <input ng-model="searchZip" type="text" id="zip-input" class="form-control" placeholder="ZIP Code..." ng-change="refreshResults(searchCriteria)"/>
+                    </div>
+                </div>
             </div>
             <div class="jumbotron">
                 <div id="filter-options-group">
@@ -92,18 +92,28 @@
 
 
                 <section>
-                    <div ng-repeat="studio in studios" class="container comment">
-                        <div class="ratings">
-                            <span class="glyphicon glyphicon-arrow-up"
-                                  ng-click="incrementVotes(review, 1)"></span>
-                            {{studio.averageRating || 0}}
-                            <span class="glyphicon glyphicon-arrow-down"
-                                  ng-click="incrementVotes(review, -1)"></span>
+                    <div ng-repeat="studio in studios" class="row">
+                        <!-- add  | filterStudios to ^ -->
+                        <div class="col-md-4">
+                            <h2>{{studio.studioName}}</h2>
+                            <p>{{studio.address}}</p>
+                            <p>{{studio.website}}</p>
+                            <p>{{studio.fbAddress}}</p>
+                            <p>{{studio.phone}}</p>
+                            <img src={{studio.imgSource}}>
                         </div>
-                        <h4>{{review.name}} - {{review.title}}</h4>
-                        <rating max="5" ng-model="review.rating" readonly="true"></rating>
-                        <p>{{review.review}}</p>
-                        <div id="remove" ng-click="removeReview(review)"><span class="glyphicon glyphicon-remove"></span></div>
+                        <div class="col-md-4">
+                            <h2>Offerings</h2>
+                            <p>{{studio.style1}}{{', ' + studio.style2 || ''}}{{', ' + studio.style3 || ''}}</p>
+                            <p>{{studio.price}}</p>
+                            <p>{{sudio.numberOfHours}}</p>
+                            <p>{{studio.price}}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <rating max="5" ng-model="studio.averageRating" readonly="true""></rating>
+                            <h3>Add your own rating:</h3>
+                            <rating max="5" ng-model="studio.ratingToAdd" readonly="false" ng-change="addRating(studio)"></rating>
+                        </div>
                     </div>
                 </section>
             </div>

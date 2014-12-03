@@ -2,20 +2,111 @@
 
 "use strict";
 
-var tasksUrl = 'https://api.parse.com/1/classes/reviews';
+var studiosUrl = 'https://api.parse.com/1/classes/Studio';
 var formIsShown = false;
 
-angular.module('CustomerReviewApp', ['ui.bootstrap'])
+angular.module('YogaStudiosApp', ['ui.bootstrap'])
     .config(function($httpProvider) {
-        $httpProvider.defaults.headers.common['X-Parse-Application-Id'] = '8KggxA5XW1zh5OoudfgNJLMHiwMjWenbfWOnjMUq';
-        $httpProvider.defaults.headers.common['X-Parse-REST-API-Key'] = 'CZ5YUhxPMa8ObW9XU6W6dn39QdOCg9PvruwJ4rLc';
+        $httpProvider.defaults.headers.common['X-Parse-Application-Id'] = 'cozjsbGa7WfKL8FgVMbNMB039GYuFUEP8g4OQdbZ';
+        $httpProvider.defaults.headers.common['X-Parse-REST-API-Key'] = 'a7tp457XQA6aAKptoUIwUSQhiIOABiMqxhQZYEZP';
     })
-    .controller('ReviewController', function($scope, $http) {
-        $scope.refreshTasks = function() {
-            $http.get(tasksUrl)
+    .controller('StudiosController', function($scope, $http) {
+        $scope.refreshStudios = function() {
+            $http.get(studiosUrl)
                 .success(function (data) {
                     $scope.studios = data.results;
+                    console.log('refreshed');
+                    console.log($scope.studios);
                 });
-        };
-        $scope.refreshTasks();
+        };  //$scope.refreshStudios
+        //called to get all the studios
+        $scope.refreshStudios();
+
+        $scope.addRating = function(studio) {
+            var ratingIncrement;
+            if (studio.numberOfRatings > 0) {
+                ratingIncrement = studio.ratingToAdd;
+            } else {
+                ratingIncrement = (studio.ratingToAdd * studio.numberOfRatings + studio.ratingToAdd) /
+                    (studio.numberOfRatings + 1) - studio.averageRating;
+            }
+            var postData = {
+                numberOfRatings: {
+                    __op: "Increment",
+                    amount: 1
+                },
+                averageRating: {
+                    __op: "Increment",
+                    amount: ratingIncrement
+                }
+            }
+            $scope.updating = true;
+            $http.put(studiosUrl + '/' + studio.objectId, postData)
+                .success(function(respData) {
+                    studio.rating = respData.averageRating;
+                })
+                .error(function(err) {
+                    console.log(err);
+                })
+                .finally(function() {
+                    $scope.updating = false;
+                })
+        };  //$scope.addRating
+    })
+    .filter('filterStudios', function(studios) {
+        return function(studios) {
+            function isInPriceRange(studio) {
+                if (searchPrice == 'any') {
+                    return true;
+                } else if (searchPrice == '4' && studio.price >= 4000 && studio.price < 5000) {
+                    return true;
+                } else if (searchPrice == '4' && studio.price >= 5000 && studio.price < 6000) {
+                    return true;
+                } else if (searchPrice == '4' && studio.price >= 6000 && studio.price < 7000) {
+                    return true;
+                } else if (searchPrice == '4' && studio.price >= 7000 && studio.price < 8000) {
+                    return true;
+                } else if (searchPrice == '4' && studio.price >= 8000 && studio.price < 9000) {
+                    return true;
+                } else if (searchPrice == '4' && studio.price >= 9000 && studio.price < 10000) {
+                    return true;
+                } else if (searchPrice == '4' && studio.price >= 10000 && studio.price < 11000) {
+                    return true;
+                } else {
+                    return false
+                }
+            }
+
+            function isInHourRange() {
+                if (searchHour == 'any') {
+                    return true;
+                } else if (searchHour == '2' && studio.numberOfHours >= 200 && studio.numberOfHours < 300) {
+                    return true;
+                } else if (searchHour == '3' && studio.numberOfHours >= 300 && studio.numberOfHours < 400) {
+                    return true;
+                } else if (searchHour == '4' && studio.numberOfHours >= 400 && studio.numberOfHours < 500) {
+                    return true;
+                } else if (searchHour == '5' && studio.numberOfHours >= 500 && studio.numberOfHours < 600) {
+                    return true;
+                } else {
+                    return false
+                }
+            }
+
+            var filteredStudios;
+            studios.forEach(function(studio) {
+                if (studio.style1.toLowerCase() == searchStyle.toLowerCase() ||
+                    studio.style2.toLowerCase() == searchStyle.toLowerCase() ||
+                    studio.style3.toLowerCase() == searchStyle.toLowerCase()) {
+                    filteredStudios.push(studio);
+                } else if (isInPriceRange(studio)) {
+                    filteredStudios.push(studio);
+                } else if (isInHourRange(studio)) {
+                    filteredStudios.push(studio);
+                } else if (!studio.address.indexOf(searchZip) == -1) {
+                    filteredStudios.push(studio);
+                }
+            });
+            return filteredStudios;
+        }
     });
