@@ -57,23 +57,38 @@
                         <select ng-model="searchPrice" id="price-selector" class="form-control">
                             <option value="" selected disabled>Price...</option>
                             <option value="any">Any Price</option>
-                            <option value="4">$4000 - $4,999</option>
-                            <option value="5">$5,000 - $5,999</option>
-                            <option value="6">$6,000 - $6,999</option>
-                            <option value="7">$7,000 - $7,999</option>
-                            <option value="8">$8,000 - $8.999</option>
-                            <option value="9">$9,000 - $9,999</option>
-                            <option value="10">$10,000 - $10,999</option>
+                            <option value="4000">$4,000</option>
+                            <option value="4500">$4,500</option>
+                            <option value="5000">$5,000</option>
+                            <option value="5500">$5,500</option>
+                            <option value="6000">$6,000</option>
+                            <option value="6500">$6,500</option>
+                            <option value="7000">$7,000</option>
+                            <option value="7500">$7,500</option>
+                            <option value="8000">$8,000</option>
+                            <option value="8500">$8,500</option>
+                            <option value="9000">$9,000</option>
+                            <option value="9500">$9,500</option>
+                            <option value="10000">$10,000</option>
                         </select>
                     </div>
                     <div class="col-md-6">
                         <select ng-model="searchHours" id="hours-selector" class="form-control">
                             <option value="" selected disabled>Hours per course...</option>
                             <option value="any">Any number of Hours</option>
-                            <option value="2">200-299</option>
-                            <option value="3">300-399</option>
-                            <option value="4">400-499</option>
-                            <option value="5">500-599</option>
+                            <option value="200">200</option>
+                            <option value="225">225</option>
+                            <option value="250">250</option>
+                            <option value="275">275</option>
+                            <option value="300">300</option>
+                            <option value="325">325</option>
+                            <option value="350">350</option>
+                            <option value="375">375</option>
+                            <option value="400">400</option>
+                            <option value="425">425</option>
+                            <option value="450">450</option>
+                            <option value="475">475</option>
+                            <option value="500">500</option>
                         </select>
                         <input ng-model="searchZip" type="text" id="zip-input" class="form-control" placeholder="ZIP Code..."/>
                     </div>
@@ -85,21 +100,22 @@
                     Sort By:
                     <div class="btn-group" role="group">
                         <button type="button" class="btn btn-default"
-                                ng-click="sortBy('style')" ng-class="{active: isSortedBy('style')}">Style</button>
+                                ng-click="sortBy('style1')" ng-class="{active: isSortedBy('style1')}">Style</button>
                         <button type="button" class="btn btn-default"
                                 ng-click="sortBy('price')" ng-class="{active: isSortedBy('price')}">Price</button>
                         <button type="button" class="btn btn-default"
-                                ng-click="sortBy('hours')" ng-class="{active: isSortedBy('hours')}">Hours Per Course</button>
+                                ng-click="sortBy('numberOfHours')" ng-class="{active: isSortedBy('numberOfHours')}">Hours Per Course</button>
                         <button type="button" class="btn btn-default"
-                                ng-click="sortBy('rating')" ng-class="{active: isSortedBy('rating')}">Average Rating</button>
+                                ng-click="sortBy('averageRating')" ng-class="{active: isSortedBy('averageRating')}">Average Rating</button>
                     </div>
                 </div>
 
                 <section>
-                    <div ng-repeat="studio in studios | orderBy: sortCol" class="profile">
+                    <div ng-repeat="studio in studios | filter: filterStyleZip() | filter: filterPrice()
+                    | orderBy: sortCol"  ng-if="studio.numberOfHours == filterHours(studio)" class="profile">
                         <!-- add  | filterStudios to ^ -->
                         <div class="row">
-                            <img class="profilePic col-md-3" src={{studio.imgSource}}>
+                            <img class="profilePic col-md-3" src='{{studio.imgSource}}'>
                             <div class="col-md-8">
                                 <h2>{{studio.studioName}}</h2>
                                 <p><a href="http://maps.google.com/?q={{studio.address}}" target="_blank">{{studio.address}}</a></p>
