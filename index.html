@@ -84,58 +84,41 @@
                     <h2>Results</h2>
                     Sort By:
                     <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-default">Style</button>
-                        <button type="button" class="btn btn-default">Price</button>
-                        <button type="button" class="btn btn-default">Hours Per Course</button>
-                        <button type="button" class="btn btn-default">Average Rating</button>
+                        <button type="button" class="btn btn-default"
+                                ng-click="sortBy('style')" ng-class="{active: isSortedBy('style')}">Style</button>
+                        <button type="button" class="btn btn-default"
+                                ng-click="sortBy('price')" ng-class="{active: isSortedBy('price')}">Price</button>
+                        <button type="button" class="btn btn-default"
+                                ng-click="sortBy('hours')" ng-class="{active: isSortedBy('hours')}">Hours Per Course</button>
+                        <button type="button" class="btn btn-default"
+                                ng-click="sortBy('rating')" ng-class="{active: isSortedBy('rating')}">Average Rating</button>
                     </div>
                 </div>
 
                 <section>
-<!--<<<<<<< HEAD-->
-                    <!--<div ng-repeat="studio in studios" class="profile">-->
-                        <!--&lt;!&ndash; add  | filterStudios to ^ &ndash;&gt;-->
-                        <!--<div class="row">-->
-                            <!--<img class="profilePic col-md-3" src={{studio.imgSource}}>-->
-                            <!--<div class="col-md-8">-->
-                                <!--<h2>{{studio.studioName}}</h2>-->
-                                <!--<p><a href="http://maps.google.com/?q={{studio.address}}" target="_blank">{{studio.address}}</a></p>-->
-                                <!--<p><a href="{{studio.website}}" target="_blank">{{studio.website}}</a></p>-->
-                                <!--<p>{{studio.fbAddress}}</p>-->
-                                <!--<p><a href="tel:{{studio.phone}}">{{studio.phone}}</a></p>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="row">-->
-                            <!--<div class="col-md-4 col-md-offset-3">-->
-                                <!--<h2>Offerings</h2>-->
-                                <!--<p>{{studio.style1}}{{', ' + studio.style2 || ''}}{{', ' + studio.style3 || ''}}</p>-->
-                                <!--<p>${{studio.price}} for {{studio.numberOfHours}} hours</p>-->
-                            <!--</div>-->
-                            <!--<div class="col-md-4">-->
-                                <!--<rating max="5" ng-model="studio.averageRating" readonly="true""></rating>-->
-                                <!--<h3>Add your own rating:</h3>-->
-                                <!--<rating max="5" ng-model="studio.ratingToAdd" readonly="false" ng-change="addRating(studio)"></rating>-->
-                            <!--</div>-->
-<!--=======-->
-                    <div ng-repeat="studio in studios | filterStudios" class="row">
+                    <div ng-repeat="studio in studios | orderBy: sortCol" class="profile">
                         <!-- add  | filterStudios to ^ -->
-                        <div class="col-md-4">
-                            <h2>{{studio.studioName}}</h2>
-                            <p>{{studio.address}}</p>
-                            <p>{{studio.website}}</p>
-                            <p>{{studio.facebookPageAddress}}</p>
-                            <p>{{studio.phone}}</p>
+                        <div class="row">
+                            <img class="profilePic col-md-3" src={{studio.imgSource}}>
+                            <div class="col-md-8">
+                                <h2>{{studio.studioName}}</h2>
+                                <p><a href="http://maps.google.com/?q={{studio.address}}" target="_blank">{{studio.address}}</a></p>
+                                <p><a href="{{studio.website}}" target="_blank">{{studio.website}}</a></p>
+                                <p>{{studio.fbAddress}}</p>
+                                <p><a href="tel:{{studio.phone}}">{{studio.phone}}</a></p>
+                            </div>
                         </div>
-                        <div class="col-md-4">
-                            <h2>Offerings</h2>
-                            <p>{{studio.style1}}{{', ' + studio.style2 || ''}}{{', ' + studio.style3 || ''}}</p>
-                            <p>{{studio.price}}</p>
-                            <p>{{studio.numberOfHours}}</p>
-                        </div>
-                        <div class="col-md-4">
-                            <h2>Add your own rating:</h2>
-                            <rating max="5" ng-model="studio.ratingToAdd" readonly="false" ng-change="addRating(studio)"></rating>
-<!-- 15530dc532e60ca0404efde7c716c109748afe8e-->
+                        <div class="row">
+                            <div class="col-md-4 col-md-offset-3">
+                                <h2>Offerings</h2>
+                                <p>{{studio.style1}}{{', ' + studio.style2 || ''}}{{', ' + studio.style3 || ''}}</p>
+                                <p>${{studio.price}} for {{studio.numberOfHours}} hours</p>
+                            </div>
+                            <div class="col-md-4">
+                                <rating max="5" ng-model="studio.averageRating" readonly="true""></rating>
+                                <h3>Add your own rating:</h3>
+                                <rating max="5" ng-model="studio.ratingToAdd" readonly="false" ng-change="addRating(studio)"></rating>
+                            </div>
                         </div>
                     </div>
                 </section>

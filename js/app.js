@@ -21,6 +21,14 @@ angular.module('YogaStudiosApp', ['ui.bootstrap'])
         //called to get all the studios
         $scope.refreshStudios();
 
+        $scope.sortCol = 'style';
+        $scope.sortBy = function(sortCol) {
+            $scope.sortCol = sortCol;
+        }
+        $scope.isSortedBy = function (sortCol) {
+            return $scope.sortCol == sortCol;
+        }
+
         $scope.addRating = function(studio) {
             var ratingIncrement;
             if (studio.numberOfRatings > 0) {
