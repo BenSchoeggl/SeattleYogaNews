@@ -48,7 +48,7 @@ angular.module('YogaStudiosApp', ['ui.bootstrap'])
             }
         }
 
-        $scope.filterHours = function (studio) {
+        $scope.filterHours = function(studio) {
             var searchHours = $('#hours-selector option:selected').val();
 
             if (searchHours == 'any' || searchHours == "") {
@@ -99,5 +99,5 @@ angular.module('YogaStudiosApp', ['ui.bootstrap'])
                 .finally(function() {
                     $scope.updating = false;
                 })
-        };  //$scope.addRating
+        };  
     });
