@@ -127,7 +127,9 @@
                         <div class="row">
                             <div class="col-md-4 col-md-offset-3">
                                 <h2>Offerings</h2>
-                                <p>{{studio.style1}}{{', ' + studio.style2 || ''}}{{', ' + studio.style3 || ''}}</p>
+                                <p>
+                                    <span>{{studio.style1}}</span><span ng-if="studio.style2">{{', ' + studio.style2}}</span><span ng-if="studio.style3">{{', ' + studio.style3}}</span>
+                                </p>
                                 <p>${{studio.price}} for {{studio.numberOfHours}} hours</p>
                             </div>
                             <div class="col-md-4">
