@@ -81,7 +81,6 @@ footer p, footer li {
 }
 
 @media screen and (min-width: 992px) {
-
     .jumbotron {
         width: 75%;
         margin-left: auto;
@@ -97,11 +96,10 @@ footer p, footer li {
         display: none;
     }
 }
-
 @media screen and (max-width: 768px) {
     body {
         margin-top: 100px;
-        background-image: url('../img/small-pic.jpg');
+        background-image: url('../img/small.jpg');  
     }
 
     .jumbotron {
