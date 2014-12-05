@@ -115,9 +115,9 @@
                     | orderBy: sortCol"  ng-if="studio.numberOfHours == filterHours(studio)" class="profile">
                         <!-- add  | filterStudios to ^ -->
                         <div class="row">
-                            <img class="profilePic col-md-3" src='{{studio.imgSource}}'>
+                            <a class="title-link" href="{{studio.website}}"><img class="profilePic col-md-3" src='{{studio.imgSource}}'></a>
                             <div class="col-md-8">
-                                <h2>{{studio.studioName}}</h2>
+                                <h2><a href="{{studio.website}}">{{studio.studioName}}</a></h2>
                                 <p><a href="http://maps.google.com/?q={{studio.address}}" target="_blank">{{studio.address}}</a></p>
                                 <p><a href="{{studio.website}}" target="_blank">{{studio.website}}</a></p>
                                 <p>{{studio.fbAddress}}</p>
