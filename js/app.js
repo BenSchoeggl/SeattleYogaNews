@@ -48,7 +48,7 @@ angular.module('YogaStudiosApp', ['ui.bootstrap'])
             }
         }
 
-        $scope.filterHours = function (studio) {
+        $scope.filterHours = function(studio) {
             var searchHours = $('#hours-selector option:selected').val();
 
             if (searchHours == 'any' || searchHours == "") {
@@ -81,49 +81,6 @@ angular.module('YogaStudiosApp', ['ui.bootstrap'])
                 })
                 .finally(function() {
                     $scope.updating = false;
-                });
-        };
-        //$scope.addRating = function(studio) {
-        //    console.log(studio);
-        //    var newRating;
-        //    if (studio.numberOfRatings < 1) {
-        //        newRating = studio.ratingToAdd;
-        //    } else {
-        //        newRating = (studio.averageRating * studio.numberOfRatings + studio.ratingToAdd) /
-        //            (studio.numberOfRatings + 1);
-        //    }
-        //    studio.averageRating = newRating;
-        //    $http.put(studiosUrl + '/' + studio.objectId, studio)
-        //        .success(function(responseData) {
-        //            console.log('worked');
-        //        })
-        //        .error(function(err) {
-        //            console.log(err);
-        //        })
-        //        .finally(function() {
-        //            $scope.updating = false;
-        //        });
-            //var postData = {
-            //    numberOfRatings: {
-            //        __op: "Increment",
-            //        amount: 1
-            //    }
-            //    averageRating: {
-            //        __op: "Increment",
-            //        amount: newRating
-            //    }
-            //}
-            //console.log(postData);
-            //$scope.updating = true;
-            //$http.put(studiosUrl + '/' + studio.objectId, postData)
-            //    .success(function(respData) {
-            //        studio.rating = respData.averageRating;
-            //    })
-            //    .error(function(err) {
-            //        console.log(err);
-            //    })
-            //    .finally(function() {
-            //        $scope.updating = false;
-            //    })
-          //$scope.addRating
+                })
+        };  
     });
