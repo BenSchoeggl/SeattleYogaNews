@@ -60,7 +60,6 @@ angular.module('YogaStudiosApp', ['ui.bootstrap'])
 
         $scope.filterZip = function() {
             var searchZip = $('#zip-input').val();
-            console.log(searchZip);
             return searchZip;
         }
 
@@ -70,34 +69,61 @@ angular.module('YogaStudiosApp', ['ui.bootstrap'])
         });
 
         //add rating code
-        $scope.addRating = function(studio) {
-            var ratingIncrement;
-            if (studio.numberOfRatings > 0) {
-                ratingIncrement = studio.ratingToAdd;
-            } else {
-                ratingIncrement = (studio.ratingToAdd * studio.numberOfRatings + studio.ratingToAdd) /
-                    (studio.numberOfRatings + 1) - studio.averageRating;
-            }
-            var postData = {
-                numberOfRatings: {
-                    __op: "Increment",
-                    amount: 1
-                },
-                averageRating: {
-                    __op: "Increment",
-                    amount: ratingIncrement
-                }
-            }
+        $scope.updateRating = function(studio) {
             $scope.updating = true;
-            $http.put(studiosUrl + '/' + studio.objectId, postData)
-                .success(function(respData) {
-                    studio.rating = respData.averageRating;
+            $http.put(studiosUrl + '/' + studio.objectId, studio)
+                .success(function(responseData) {
+                    //nothing we really need to do since local object is already up-to-date
                 })
                 .error(function(err) {
                     console.log(err);
+                    //notify user in some way
                 })
                 .finally(function() {
                     $scope.updating = false;
-                })
-        };  //$scope.addRating
+                });
+        };
+        //$scope.addRating = function(studio) {
+        //    console.log(studio);
+        //    var newRating;
+        //    if (studio.numberOfRatings < 1) {
+        //        newRating = studio.ratingToAdd;
+        //    } else {
+        //        newRating = (studio.averageRating * studio.numberOfRatings + studio.ratingToAdd) /
+        //            (studio.numberOfRatings + 1);
+        //    }
+        //    studio.averageRating = newRating;
+        //    $http.put(studiosUrl + '/' + studio.objectId, studio)
+        //        .success(function(responseData) {
+        //            console.log('worked');
+        //        })
+        //        .error(function(err) {
+        //            console.log(err);
+        //        })
+        //        .finally(function() {
+        //            $scope.updating = false;
+        //        });
+            //var postData = {
+            //    numberOfRatings: {
+            //        __op: "Increment",
+            //        amount: 1
+            //    }
+            //    averageRating: {
+            //        __op: "Increment",
+            //        amount: newRating
+            //    }
+            //}
+            //console.log(postData);
+            //$scope.updating = true;
+            //$http.put(studiosUrl + '/' + studio.objectId, postData)
+            //    .success(function(respData) {
+            //        studio.rating = respData.averageRating;
+            //    })
+            //    .error(function(err) {
+            //        console.log(err);
+            //    })
+            //    .finally(function() {
+            //        $scope.updating = false;
+            //    })
+          //$scope.addRating
     });

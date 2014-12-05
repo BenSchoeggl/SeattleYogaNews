@@ -106,7 +106,7 @@
                         <button type="button" class="btn btn-default"
                                 ng-click="sortBy('numberOfHours')" ng-class="{active: isSortedBy('numberOfHours')}">Hours Per Course</button>
                         <button type="button" class="btn btn-default"
-                                ng-click="sortBy('averageRating')" ng-class="{active: isSortedBy('averageRating')}">Average Rating</button>
+                                ng-click="sortBy('ratingToAdd')" ng-class="{active: isSortedBy('ratingToAdd')}">Average Rating</button>
                     </div>
                 </div>
 
@@ -133,9 +133,13 @@
                                 <p>${{studio.price}} for {{studio.numberOfHours}} hours</p>
                             </div>
                             <div class="col-md-4">
-                                <rating max="5" ng-model="studio.averageRating" readonly="true""></rating>
+                                <span ng-if="studio.averageRating">
+                                    <h3>Current Rating:</h3>
+                                    <rating max="5" ng-model="studio.averageRating" readonly="true""></rating>
+                                </span>
                                 <h3>Add your own rating:</h3>
-                                <rating max="5" ng-model="studio.ratingToAdd" readonly="false" ng-change="addRating(studio)"></rating>
+                                <rating max="5" ng-model="studio.ratingToAdd" readonly="false"
+                                        ng-change="updateRating(studio)"></rating>
                             </div>
                         </div>
                     </div>
