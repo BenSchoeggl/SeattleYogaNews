@@ -31,17 +31,11 @@ angular.module('YogaStudiosApp', ['ui.bootstrap'])
         }
 
         //filters based off their selected categories
-        $scope.filterStyleZip = function() {
+        $scope.filterStyle = function (studio) {
             var searchStyle = $('#style-selector option:selected').text();
-            var searchZip = $('#zip-input').val();
 
-            if (searchStyle == 'Any Style') {
-                return null;
-            } else  if (searchStyle == 'Style...') {
-                return searchZip;
-            } else {
-                return searchStyle + " " + searchZip;
-            }
+            return (searchStyle == 'Any Style' || searchStyle == 'Style...' || searchStyle == studio.style1
+                || searchStyle == studio.style2 || searchStyle == studio.style3);
         }
 
         $scope.filterPrice = function() {
@@ -63,6 +57,17 @@ angular.module('YogaStudiosApp', ['ui.bootstrap'])
                 return searchHours;
             }
         }
+
+        $scope.filterZip = function() {
+            var searchZip = $('#zip-input').val();
+            console.log(searchZip);
+            return searchZip;
+        }
+
+        //collapse navbar for mobile
+        $(".navbar-nav li a").click(function(event) {
+            $(".navbar-collapse").collapse('hide');
+        });
 
         //add rating code
         $scope.addRating = function(studio) {

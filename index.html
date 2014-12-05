@@ -111,8 +111,8 @@
                 </div>
 
                 <section>
-                    <div ng-repeat="studio in studios | filter: filterStyleZip() | filter: filterPrice()
-                    | orderBy: sortCol"  ng-if="studio.numberOfHours == filterHours(studio)" class="profile">
+                    <div ng-repeat="studio in studios | filter: filterPrice() | filter: filterZip()
+                    | orderBy: sortCol" ng-if="filterStyle(studio) && (studio.numberOfHours == filterHours(studio))" class="profile">
                         <!-- add  | filterStudios to ^ -->
                         <div class="row">
                             <img class="profilePic col-md-3" src='{{studio.imgSource}}'>
